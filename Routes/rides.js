@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Ride = require('../Models/Rides');
 const {Booking} = require('../Models/Booking');
-// ✅ POST /api/rides - Add a new ride
+// adjust path to your Booking model
+
 router.post('/', async (req, res) => {
   try {
     const {
@@ -26,8 +27,23 @@ router.post('/', async (req, res) => {
     });
 
     const savedRide = await newRide.save();
+
+    // After saving the ride, update the booking status to 'finish'
+    await Booking.findByIdAndUpdate(Booking_ID, {
+      status: 'finish',
+      statuscheck: true,
+      finish_active: true,
+
+      // Optional: deactivate other statuses
+      house_type_active: false,
+      booking_active: false,
+      payment_status_active: false,
+      on_the_way_active: false,
+      cancel_active: false
+    });
+
     res.status(201).json({
-      message: 'Ride added successfully',
+      message: 'Ride added successfully, booking marked as finished.',
       data: savedRide
     });
   } catch (error) {
