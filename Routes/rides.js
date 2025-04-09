@@ -94,14 +94,7 @@ router.get('/wallet/summary/:truckpartnerId', async (req, res) => {
     const totalTrips = rides.reduce((sum, ride) => sum + (ride.total_trip || 0), 0);
     const withdrawableAmount = totalEarning ;
 
-    console.log({
-      totalRides,
-      totalEarning,
-      todayEarning,
-      totalTrips,
-      withdrawableAmount
-    });
-
+ 
     // Respond with wallet summary
     res.json({
       totalRides,

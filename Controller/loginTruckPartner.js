@@ -23,7 +23,7 @@ const loginTruckPartner = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, partner.t_password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid email or password" });
-
+    console.log(partner)
     const token = jwt.sign(
       { id: partner.truck_partner_uuid, role: "truck_partner" },
       process.env.JWT_SECRET,

@@ -3,7 +3,6 @@ const router = express.Router();
 const Transactions = require('../Models/Transaction');
 
 router.post('/', async (req, res) => {
-    console.log("Incoming transaction:", req.body);
     try {
       const newTransaction = new Transactions(req.body);
       const savedTransaction = await newTransaction.save();

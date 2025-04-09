@@ -55,7 +55,7 @@ const TruckPartnerSchema = new mongoose.Schema({
     },
     t_picture: {
         type: String,
-        required: true
+        required: false
     },
     status: {
         type: Boolean,

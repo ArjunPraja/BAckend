@@ -7,7 +7,6 @@ const bookingRoutes = require('./Routes/booking');
 const buyPackageRoutes = require('./Routes/buyPackage');
 const loginTruckPartner = require("./Controller/loginTruckPartner");
 const Ride = require('./Models/Rides'); // update the path accordingly
-const truckPartnerRoutes = require('./Routes/truckPartner');
 const path = require('path'); // ✅ Required to fix your error
 const adminApis=require('./Controller/AdminController')
 const TruckPartner = require('./Models/TrucPartner')
@@ -23,6 +22,7 @@ const rideRoutes = require('./Routes/rides');
 const RegisterTruckPartner = require('./Controller/RegisterTruckPartner');
 app.use(express.json());
 const transactionRoutes = require('./Routes/Transactionroutes');
+const profileRoutes = require('./Controller/truckPartnerController');
 
 
 connectDB();
@@ -44,10 +44,14 @@ app.use('/api/transactions', transactionRoutes);
 
 app.use('/api/buy-package', buyPackageRoutes); 
 
-app.use('/api/truckpartner', truckPartnerRoutes);
 
-// Serve uploaded images statically
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Routes
+app.use('/api/profile', profileRoutes);
+
+
 
 
 app.post("/partner/login", loginTruckPartner);
